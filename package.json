@@ -1,0 +1,17 @@
+{
+  "name": "isuoscrapper",
+  "version": "0.0.0",
+  "private": "true",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Max Fedotov <fedotom2@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "needle": "^2.0.1",
+    "tress": "^1.0.5"
+  }
+}
