@@ -8,17 +8,16 @@ const fs = require('fs');
 
 const sufpref = (str, prefix, suffix) => str.match(`${prefix}(.*?)${suffix}`)[1];
 
-const URL = 'https://vn.isuo.org/authorities/schools-list/id/179/';
+const URL = 'https://vn.isuo.org/schools/view/id/8761';
 const results = [];
 
-const q = tress((url, callback) => {
 
-  needle.get(url, (err, res) => {
-    if (err) throw err;
+needle.get(URL, (err, res) => {
+  if (err) throw err;
 
-    const $ = cheerio.load(res.body);
+  const $ = cheerio.load(res.body);
 
-    if ($('ul.tabs li').length === 1) {
+  if ($('ul.tabs li').length === 1) {
       let oblast;
       let name;
       let email;
@@ -64,7 +63,6 @@ const q = tress((url, callback) => {
       console.log('E-mail: \n' + email);
       console.log('Сайт: \n' + site);
       console.log('\n');
-
       results.push({
         'Область': oblast,
         'Повна назва': name,
@@ -73,21 +71,5 @@ const q = tress((url, callback) => {
       });
     }
 
-    $('.list a').each(function () {
-      q.push(resolve(URL, $(this).attr('href')));
-    });
+});
 
-    $('#pagination-digg ul li.active + li a').each(function () {
-      if ($(this).attr('href') !== undefined)
-        q.push(resolve(URL, $(this).attr('href')));
-    });
-
-    callback();
-  });
-}, 10);
-
-q.drain = function () {
-  fs.writeFileSync('./db.json', JSON.stringify(results, null, 2));
-};
-
-q.push(URL);
