@@ -32,7 +32,7 @@ const q = tress((url, callback) => {
 }, 10);
 
 q.drain = function () {
-  fs.writeFileSync('./db.json', JSON.stringify(results, null, 4));
+  fs.writeFileSync('./db.json', JSON.stringify(results, null, 2));
 };
 
 q.push(URL);

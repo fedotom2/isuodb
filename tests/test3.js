@@ -34,7 +34,7 @@ needle.get(URL, (err, res) => {
 
         if ($(this).text() === 'Поштова адреса:') {
           if ($(this).next().text() !== undefined) {
-            oblast = $(this).next().text().split(',')[1];
+            oblast = $(this).next().text().split(',')[1].substr(1);
           } else {
             oblast = '';
           }
